@@ -69,39 +69,37 @@ function displayWeather(weatherData){
     
     // setting variables for weather information I want to display on my page
     const locationName = weatherData.name
-    // console.log(locationName)
-
-    const timezone = weatherData.timezone 
-    // console.log(timezone)
-
+    const locationState = weatherData.state
+    // console.log(locationName)   
     const currentTempK = weatherData.main.temp
     // conversion from Kelvin to Farenheit
     const currentTemp = Math.floor((currentTempK- 273.15) * 9/5 + 32)
     // console.log(currentTemp + '°F')
-
     const currentFeelsLikeK = weatherData.main.feels_like
     const currentFeelsLike = Math.floor((currentFeelsLikeK- 273.15) * 9/5 + 32)
     // console.log(currentFeelsLike + '°F')
-
     const currentHumidity = weatherData.main.humidity
     // console.log(currentHumidity)
-
     const currentWeatherDescription = weatherData.weather[0].description
     // console.log(currentWeatherDescription)
-
     const currentWeatherIcon = weatherData.weather[0].icon
+
+    // calculating current time 
+    const today = new Date()
+    const currentDate = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear()
+    const currentTime = today.toLocaleString('en-US', {hour:'numeric', minute:'numeric', hour12: true})
+
     
-    // console.logging all variables to see if they work
-    // console.log(weatherData)
-    
+
     weatherCard.innerHTML = `
     <div class="card" style="width: 18rem;">
         <img class="card-img-top" src="https://openweathermap.org/img/wn/${currentWeatherIcon}@2x.png" alt="Card image cap">
         <div class="card-body">
-            <h5 class="card-title">${locationName}</h5>
+            <h2 class="card-title">${locationName}</h2>
+            <h6 class="card-time">${currentDate}  |  ${currentTime}</h6>
             <p class="card-text">${currentWeatherDescription}</p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Temperature: ${currentTemp}°F</li>
+                <li class="list-group-item">Current Temp: ${currentTemp}°F</li>
                 <li class="list-group-item">Feels Like: ${currentFeelsLike}°F</li>
                 <li class="list-group-item">Humidity: ${currentHumidity}</li>
             </ul>
