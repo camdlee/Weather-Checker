@@ -13,10 +13,10 @@ locationForm.addEventListener('submit', (event) => {
     // preventing page from refreshing
     event.preventDefault()
 
-    console.log(event)
-    console.log(event.target[0].value)
-    console.log(event.target[1].value)
-    console.log(event.target[2].value)
+    // console.log(event)
+    // console.log(event.target[0].value)
+    // console.log(event.target[1].value)
+    // console.log(event.target[2].value)
     // console.log(locationForm.name.value)
     // creating varibale with input from search
 
@@ -29,7 +29,7 @@ locationForm.addEventListener('submit', (event) => {
 
 })
 
-
+//------------------------------QUERY WEATHER DATA FUNCTION-------------------------------------
 // Creating async function to query weather data from the location search
 async function weatherData(city, state, country){
 
@@ -40,7 +40,7 @@ async function weatherData(city, state, country){
     
     // awaiting response from Geocoding API
     const locationData = await locationResponse.json()
-    console.log(locationData)
+    // console.log(locationData)
     
     // setting variables for location name
     // const locationName = locationData[0].name
@@ -59,12 +59,13 @@ async function weatherData(city, state, country){
 
     // awaiting response from Weather API
     const weatherData = await weatherResponse.json()
-    console.log(weatherData)
+    // console.log(weatherData)
 
     displayWeather(weatherData)
+
 }
 
-
+//------------------------------DISPLAY WEATHER FUNCTION-------------------------------------
 function displayWeather(weatherData){
     
     // setting variables for weather information I want to display on my page
@@ -81,7 +82,6 @@ function displayWeather(weatherData){
         // const currentFeelsLike = Math.floor((currentFeelsLikeK- 273.15) * 9/5 + 32)
         // console.log(currentFeelsLike + '°F')
 
-
     const currentTempImp = Math.floor(weatherData.main.temp)
     const currentFeelsLikeImp = Math.floor(weatherData.main.feels_like)
     
@@ -91,15 +91,36 @@ function displayWeather(weatherData){
     const currentWeatherDescription = weatherData.weather[0].description
     // console.log(currentWeatherDescription)
     const currentWeatherIcon = weatherData.weather[0].icon
-
+    console.log(currentWeatherIcon)
     
+
+    //------------------------------CHANGE BACKGROUND FUNCTION-------------------------------------
+    if (currentWeatherIcon === '01d'|'01n'){
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1530530824905-661c2bb787f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=432&q=80)"
+    } else if (currentWeatherIcon === '02d'|'02n') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1505533542167-8c89838bb19e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80)"
+    } else if (currentWeatherIcon === '03d'|'03n') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1562494400-5b335a653209?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=462&q=80)"
+    } else if (currentWeatherIcon === '04d'|'04n') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1534088568595-a066f410bcda?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=451&q=80)"
+    } else if (currentWeatherIcon === '09d') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1580193813605-a5c78b4ee01a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=465&q=80)"
+    } else if (currentWeatherIcon === '10d') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80)"
+    } else if (currentWeatherIcon === '11d') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1472145246862-b24cf25c4a36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80)"
+    } else if (currentWeatherIcon === '13d') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1491002052546-bf38f186af56?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1508&q=80)"
+    } else if (currentWeatherIcon === '50d') {
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1585508889431-a1d0d9c5a324?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80)"
+    } else{
+        document.body.style.backgroundImage = "url(https://images.unsplash.com/photo-1530530824905-661c2bb787f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=432&q=80)"
+    }
 
     // calculating current time 
     const today = new Date()
     const currentDate = (today.getMonth()+1) + "/" + today.getDate() + "/" + today.getFullYear()
     const currentTime = today.toLocaleString('en-US', {hour:'numeric', minute:'numeric', hour12: true})
-
-    
 
     weatherCard.innerHTML = `
     <div class="card" style="width: 18rem;">

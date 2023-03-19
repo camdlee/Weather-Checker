@@ -3,10 +3,11 @@ body{
     justify-content: center;
     align-items: center;
     text-align: center;
+    flex-flow: column wrap;
     min-height: 100vh;
     gap: 10px;
-    padding-bottom: 2%;
-    /* background-image: url("https://images.unsplash.com/photo-1534274988757-a28bf1a57c17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=435&q=80"); */
+    padding: 2%;
+    background: url('https://t4.ftcdn.net/jpg/01/03/58/85/360_F_103588568_anFch0KofnmcER5zREeyCDnW5bXqooVE.jpg');
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -55,3 +56,4 @@ h6{
 .list-group-item{
     background: rgba(255, 255, 255, 0);
 }
+
