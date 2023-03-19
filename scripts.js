@@ -54,7 +54,7 @@ async function weatherData(city, state, country){
     //now that we have latitude and longitude of locations, we can use those variables to fetch data from Weather API
     
     // fetching data from weather api   
-    weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${locationLatitude}&lon=${locationLongitude}&appid=${APIkey}`
+    weatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${locationLatitude}&lon=${locationLongitude}&units=imperial&appid=${APIkey}`
     const weatherResponse = await fetch(weatherUrl)
 
     // awaiting response from Weather API
@@ -71,18 +71,28 @@ function displayWeather(weatherData){
     const locationName = weatherData.name
     const locationState = weatherData.state
     // console.log(locationName)   
-    const currentTempK = weatherData.main.temp
-    // conversion from Kelvin to Farenheit
-    const currentTemp = Math.floor((currentTempK- 273.15) * 9/5 + 32)
-    // console.log(currentTemp + '°F')
-    const currentFeelsLikeK = weatherData.main.feels_like
-    const currentFeelsLike = Math.floor((currentFeelsLikeK- 273.15) * 9/5 + 32)
-    // console.log(currentFeelsLike + '°F')
+
+    // CODE BEFORE CHANGING UNITS TO IMPERIAL IN URL
+        // const currentTempK = weatherData.main.temp
+        // conversion from Kelvin to Farenheit
+        // const currentTemp = Math.floor((currentTempK- 273.15) * 9/5 + 32)
+        // console.log(currentTemp + '°F')
+        // const currentFeelsLikeK = weatherData.main.feels_like
+        // const currentFeelsLike = Math.floor((currentFeelsLikeK- 273.15) * 9/5 + 32)
+        // console.log(currentFeelsLike + '°F')
+
+
+    const currentTempImp = Math.floor(weatherData.main.temp)
+    const currentFeelsLikeImp = Math.floor(weatherData.main.feels_like)
+    
     const currentHumidity = weatherData.main.humidity
+    const currentWindspd = weatherData.wind.speed
     // console.log(currentHumidity)
     const currentWeatherDescription = weatherData.weather[0].description
     // console.log(currentWeatherDescription)
     const currentWeatherIcon = weatherData.weather[0].icon
+
+    
 
     // calculating current time 
     const today = new Date()
@@ -99,9 +109,10 @@ function displayWeather(weatherData){
             <h6 class="card-time">${currentDate}  |  ${currentTime}</h6>
             <p class="card-text">${currentWeatherDescription}</p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Current Temp: ${currentTemp}°F</li>
-                <li class="list-group-item">Feels Like: ${currentFeelsLike}°F</li>
-                <li class="list-group-item">Humidity: ${currentHumidity}</li>
+                <li class="list-group-item">Current Temp: ${currentTempImp}°F</li>
+                <li class="list-group-item">Feels Like: ${currentFeelsLikeImp}°F</li>
+                <li class="list-group-item">Humidity: ${currentHumidity}%</li>
+                <li class="list-group-item">Wind Speed: ${currentWindspd}</li>
             </ul>
         </div>
     </div>
