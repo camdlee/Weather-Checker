@@ -4,7 +4,7 @@
 // Weather API credentials
 const APIkey = '931fd2c657888a7ce24e207c3893d638'
 
-const weatherCard = document.querySelector('weatherCard')
+const weatherCard = document.querySelector('.weatherCard')
 
 // Creating Search for Location to search weat
 const locationForm = document.querySelector('#form-data')
@@ -69,39 +69,41 @@ function displayWeather(weatherData){
     
     // setting variables for weather information I want to display on my page
     const locationName = weatherData.name
-    console.log(locationName)
+    // console.log(locationName)
 
     const timezone = weatherData.timezone 
-    console.log(timezone)
+    // console.log(timezone)
 
     const currentTempK = weatherData.main.temp
     // conversion from Kelvin to Farenheit
     const currentTemp = Math.floor((currentTempK- 273.15) * 9/5 + 32)
-    console.log(currentTemp + '°F')
+    // console.log(currentTemp + '°F')
 
     const currentFeelsLikeK = weatherData.main.feels_like
     const currentFeelsLike = Math.floor((currentFeelsLikeK- 273.15) * 9/5 + 32)
-    console.log(currentFeelsLike + '°F')
+    // console.log(currentFeelsLike + '°F')
 
     const currentHumidity = weatherData.main.humidity
-    console.log(currentHumidity)
+    // console.log(currentHumidity)
 
     const currentWeatherDescription = weatherData.weather[0].description
-    console.log(currentWeatherDescription)
+    // console.log(currentWeatherDescription)
+
+    const currentWeatherIcon = weatherData.weather[0].icon
     
     // console.logging all variables to see if they work
     // console.log(weatherData)
     
     weatherCard.innerHTML = `
     <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
+        <img class="card-img-top" src="https://openweathermap.org/img/wn/${currentWeatherIcon}@2x.png" alt="Card image cap">
         <div class="card-body">
             <h5 class="card-title">${locationName}</h5>
-            <p class="card-text"></p>
+            <p class="card-text">${currentWeatherDescription}</p>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">Temperature:</li>
-                <li class="list-group-item">Feels Like:</li>
-                <li class="list-group-item">Humidity:</li>
+                <li class="list-group-item">Temperature: ${currentTemp}°F</li>
+                <li class="list-group-item">Feels Like: ${currentFeelsLike}°F</li>
+                <li class="list-group-item">Humidity: ${currentHumidity}</li>
             </ul>
         </div>
     </div>
